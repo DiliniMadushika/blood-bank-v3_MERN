@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
+body {
+	margin: 0;
+	font-family: 'Ubuntu', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+/* Set the top of body padding */
+.main-content {
+	padding-top: 60px;
+}
+
+/* Set height to screen  size */
+.height-100-minus-60 {
+	height: calc(100vh - 124px);
+}
+
+.height-100-minus-172 {
+	height: calc(100vh - 172px);
+}
+
+code {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
