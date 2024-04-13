@@ -1,8 +1,9 @@
-import { useAuth } from '../../hooks/useAuth';
+import { useAuth, useRole } from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
 	const isLoggedIn = useAuth();
+	const role = useRole();
 	const navigate = useNavigate();
 
 	return (
@@ -17,7 +18,7 @@ const Home = () => {
 					<button
 						className='btn btn-danger'
 						onClick={() => {
-							if (!isLoggedIn) navigate('/signin');
+							if (!isLoggedIn || !role) navigate('/signin');
 							else navigate('/request');
 						}}
 					>

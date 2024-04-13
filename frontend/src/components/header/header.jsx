@@ -26,7 +26,7 @@ const Header = () => {
 	};
 
 	const welcomeMessage = () => {
-		if (isLoggedIn) {
+		if (isLoggedIn && role) {
 			if (role === 'user') {
 				return 'Welcome, User';
 			} else if (role === 'inventoryManager') {
@@ -85,7 +85,7 @@ const Header = () => {
 				</div>
 				<div className='nav justify-content-end mx-2 '>
 					{/* Sign In And Sign Out */}
-					{isLoggedIn ? (
+					{isLoggedIn && role ? (
 						<button className='btn btn-light m-1 border-dark' onClick={signOut}>
 							Sign Out
 						</button>
