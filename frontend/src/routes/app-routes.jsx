@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import * as Pages from '../pages';
 import Header from '../components/header/header';
 import Footer from '../components/footer/footer';
+import { useEffect, useState } from 'react';
 
 // Inventory Manager Routes
 const iManagerRoutes = [
@@ -71,20 +72,34 @@ const guestRoutes = [
 // AppRoutes component
 const AppRoutes = () => {
 	// Check if user is logged in
-	const isLoggedIn = localStorage.getItem('token');
-	const role = localStorage.getItem('role');
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const [role, setRole] = useState('guest');
+	const token = localStorage.getItem('token');
+	const roleLocal = localStorage.getItem('role');
+
+	// Check if user is logged in
+	useEffect(() => {
+		if (token && roleLocal) {
+			setIsLoggedIn(true);
+			setRole(roleLocal);
+		}
+	}, [token, roleLocal]);
+	console.log(isLoggedIn, role);
 
 	// Define routes based on role
 	const getRoutes = () => {
-		if (!isLoggedIn) {
-			return guestRoutes; // Guest routes when not logged in
-		} else if (role === 'inventoryManager') {
-			return iManagerRoutes; // Inventory manager routes
-		} else if (role === 'requestManager') {
-			return rManagerRoutes; // Request manager routes
-		} else if (role === 'user') {
-			return userRoutes; // User routes
+		if (isLoggedIn) {
+			if (role === 'inventoryManager') {
+				return iManagerRoutes; // Inventory manager routes
+			}
+			if (role === 'requestManager') {
+				return rManagerRoutes; // Request manager routes
+			}
+			if (role === 'user') {
+				return userRoutes; // User routes
+			}
 		}
+		return guestRoutes; // Guest routes
 	};
 
 	const useRoutes = getRoutes();
